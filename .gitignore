@@ -1,0 +1,35 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Переменные окружения — никогда не коммитить!
+.env
+.env.local
+
+# ML модели
+backend/src/ml/saved_models/*.pkl
+backend/src/ml/saved_models/*.joblib
+
+# Alembic
+backend/migrations/versions/*.pyc
+
+# Node.js / Expo
+frontend/node_modules/
+frontend/.expo/
+frontend/dist/
+
+# Expo build артефакты
+*.apk
+*.ipa
+*.aab
+
+# IDE
+.vscode/
+.idea/
+*.DS_Store
