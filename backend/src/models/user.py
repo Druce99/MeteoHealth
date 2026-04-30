@@ -11,11 +11,11 @@ class User(BaseModel):
     __tablename__ = "users"
 
     name: Mapped[str] = mapped_column(VARCHAR(100), nullable=False)
-    age_group: Mapped[AgeGroup] = mapped_column(SAEnum(AgeGroup), nullable=False)
+    age_group: Mapped[AgeGroup] = mapped_column(SAEnum(AgeGroup, values_callable=lambda x: [e.value for e in x]), nullable=False)
     location_name: Mapped[str] = mapped_column(VARCHAR(100), nullable=True)
     latitude: Mapped[float] = mapped_column(Float, nullable=False)
     longitude: Mapped[float] = mapped_column(Float, nullable=False)
-    conditions: Mapped[list[HealthCondition]] = mapped_column(ARRAY(SAEnum(HealthCondition)), default=list, nullable=False)
+    conditions: Mapped[list[HealthCondition]] = mapped_column(ARRAY(SAEnum(HealthCondition, values_callable=lambda x: [e.value for e in x])), default=list, nullable=False)
     sensitivity_pressure: Mapped[int] = mapped_column(SmallInteger, default=2)
     sensitivity_kp: Mapped[int] = mapped_column(SmallInteger, default=2)
     sensitivity_temp: Mapped[int] = mapped_column(SmallInteger, default=2)

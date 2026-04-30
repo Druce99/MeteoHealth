@@ -13,7 +13,7 @@ class DiaryEntry(BaseModel):
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
     entry_date: Mapped[date] = mapped_column(Date, nullable=False)
     wellbeing_score: Mapped[int] = mapped_column(Integer, nullable=False)
-    symptoms: Mapped[list[Symptom]] = mapped_column(ARRAY(SAEnum(Symptom)), nullable=False)
+    symptoms: Mapped[list[Symptom]] = mapped_column(ARRAY(SAEnum(Symptom, values_callable=lambda x: [e.value for e in x])), nullable=False)
     note: Mapped[str | None] = mapped_column(Text, nullable=True)
     pressure: Mapped[float | None] = mapped_column(Float, nullable=True)
     kp_index: Mapped[float | None] = mapped_column(Float, nullable=True)

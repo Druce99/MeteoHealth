@@ -16,7 +16,6 @@ class Settings(BaseSettings):
     
     
     REDIS_URL: str
-    OPENWEATHERMAP_API_KEY: str
     SECRET_KEY: str
     
     APP_NAME: str = Field(default="MeteoHealth", env="APP_NAME")
