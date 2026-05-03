@@ -1,14 +1,13 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
     
-    DB_HOST: str = Field(default="localhost", env="DB_HOST")
-    DB_PORT: int = Field(default=5432, env="DB_PORT")
-    DB_USER: str = Field(default="postgres", env="DB_USER")
-    DB_PASSWORD: str = Field(default="postgres", env="DB_PASSWORD")
-    DB_NAME: str = Field(default="meteohealth_db", env="DB_NAME")
+    DB_HOST: str = "localhost"
+    DB_PORT: int = 5432
+    DB_USER: str = "postgres"
+    DB_PASSWORD: str = "postgres"
+    DB_NAME: str = "meteohealth_db"
 
     @property
     def DATABASE_URL(self) -> str:
@@ -18,8 +17,8 @@ class Settings(BaseSettings):
     REDIS_URL: str
     SECRET_KEY: str
     
-    APP_NAME: str = Field(default="MeteoHealth", env="APP_NAME")
-    APP_VERSION: str = Field(default="1.0.0", env="APP_VERSION")
-    DEBUG: bool = Field(default=True, env="DEBUG")
+    APP_NAME: str = "MeteoHealth"
+    APP_VERSION: str = "1.0.0"
+    DEBUG: bool = True
 
 settings = Settings()
