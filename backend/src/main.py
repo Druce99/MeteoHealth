@@ -1,8 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from src.core.config import settings
 from contextlib import asynccontextmanager
 
-
+from src.core.exceptions import NotFoundException
 from src.core.database import async_engine
 from src.core.redis import broker
 from src.api.v1.router import api_router
@@ -21,3 +22,7 @@ app = FastAPI(
 )
 
 app.include_router(api_router, prefix="/api/v1")
+
+@app.exception_handler(NotFoundException)
+async def not_found_handler(request: Request, exc: NotFoundException):
+    return JSONResponse(status_code=404, content={"detail": str(exc)})
