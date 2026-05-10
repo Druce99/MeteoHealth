@@ -1,27 +1,28 @@
 from pydantic import BaseModel, Field, ConfigDict
 from uuid import UUID
-from datetime import datetime, date
+from datetime import datetime
+from datetime import date as DateType
 
 from src.models.enums import Symptom
 
 class DiaryCreate(BaseModel):
-    entry_date: date = Field(description="Дата записи")
+    date: DateType = Field(description="Дата записи")
     wellbeing_score: int = Field(ge=1, le=10, description="Оценка самочувствия (1-плохо, 10-отлично)")
     symptoms: list[Symptom] = Field(default_factory=list, description="Список симптомов")
     note: str | None = Field(None, description="Заметка пользователя")
 
 class DiaryUpdate(BaseModel):
-    entry_date: date | None = Field(None, description="Дата записи")
+    date: DateType | None = Field(None, description="Дата записи")
     wellbeing_score: int | None = Field(None, ge=1, le=10, description="Оценка самочувствия (1-плохо, 10-отлично)")
-    symptoms: list[Symptom] | None= Field(None, description="Список симптомов")
+    symptoms: list[Symptom] | None = Field(None, description="Список симптомов")
     note: str | None = Field(None, description="Заметка пользователя")
 
 class DiaryResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    
+
     id: UUID = Field(description="ID записи")
     user_id: UUID = Field(description="ID пользователя")
-    entry_date: date = Field(description="Дата записи")
+    date: DateType = Field(description="Дата записи")
     wellbeing_score: int = Field(ge=1, le=10, description="Оценка самочувствия (1-плохо, 10-отлично)")
     symptoms: list[Symptom] = Field(default_factory=list, description="Список симптомов")
     note: str | None = Field(None, description="Заметка пользователя")

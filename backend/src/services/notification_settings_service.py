@@ -19,7 +19,9 @@ class NotificationSettingsService:
             raise NotFoundException("Пользователь не найден")
         settings = await self.settings_repo.get_by_user_id(user_id)
         if not settings:
-            raise NotFoundException("Настройки не найдены")
+            settings = await self.settings_repo.create({"user_id": user_id})
+            await self.db.commit()
+            await self.db.refresh(settings)
         return settings
     
     async def update_settings(self, user_id: UUID, data: NotificationSettingsUpdate) -> UserNotificationSettings:

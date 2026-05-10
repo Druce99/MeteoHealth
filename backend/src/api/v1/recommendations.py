@@ -7,7 +7,6 @@ from src.repositories.recommendation_repository import RecommendationRepository
 from src.repositories.user_repository import UserRepository
 from src.services.recommendation_service import RecommendationService
 from src.schemas.recommendation import RecommendationResponse
-from src.models.enums import WeatherTrigger
 
 router = APIRouter()
 
@@ -21,5 +20,5 @@ async def get_all_recommendations(service: RecommendationService = Depends(get_r
     return await service.get_all_recommendations()
 
 @router.get("/{user_id}/today", response_model=list[RecommendationResponse])
-async def get_recommendations_for_user(user_id: UUID, triggers: list[WeatherTrigger], service: RecommendationService = Depends(get_recommendation_service)):
-    return await service.get_recommendations_for_user(user_id, triggers)
+async def get_today_recommendations(user_id: UUID, service: RecommendationService = Depends(get_recommendation_service)):
+    return await service.get_today_recommendations(user_id)

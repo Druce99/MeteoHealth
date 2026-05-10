@@ -11,9 +11,9 @@ class DiaryRepository(BaseRepository[DiaryEntry]):
         super().__init__(DiaryEntry, db)
     
     async def get_by_user_id(self, user_id: UUID) -> list[DiaryEntry]:
-        result = await self.db.scalars(select(DiaryEntry).where(DiaryEntry.user_id == user_id).order_by(DiaryEntry.entry_date.desc()))
+        result = await self.db.scalars(select(DiaryEntry).where(DiaryEntry.user_id == user_id).order_by(DiaryEntry.date.desc()))
         return list(result.all())
-    
+
     async def get_by_user_and_date(self, user_id: UUID, entry_date: date) -> DiaryEntry | None:
-        result = await self.db.scalars(select(DiaryEntry).where(DiaryEntry.user_id == user_id, DiaryEntry.entry_date == entry_date))
+        result = await self.db.scalars(select(DiaryEntry).where(DiaryEntry.user_id == user_id, DiaryEntry.date == entry_date))
         return result.first()

@@ -7,6 +7,7 @@ class OpenMeteoClient:
             "latitude": lat,
             "longitude": lon,
             "hourly": "surface_pressure,temperature_2m,relative_humidity_2m",
+            "past_days": 1,
             "forecast_days": 7,
             "timezone": "auto",
         }

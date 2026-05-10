@@ -2,7 +2,7 @@ from uuid import UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.repositories.diary_repository import DiaryRepository
-from src.repositories.ml_model_repository import MLModelRepository
+from src.repositories.ml_model_repository import MlModelRepository
 from src.repositories.user_repository import UserRepository
 from src.services.forecast_service import ForecastService
 from src.ml import trainer, predictor
@@ -11,7 +11,7 @@ from src.core.exceptions import NotFoundException
 MIN_ENTRIES = 14
 
 class MlService:
-    def __init__(self, diary_repo: DiaryRepository, ml_repo: MLModelRepository, user_repo: UserRepository, db: AsyncSession):
+    def __init__(self, diary_repo: DiaryRepository, ml_repo: MlModelRepository, user_repo: UserRepository, db: AsyncSession):
         self.diary_repo = diary_repo
         self.ml_repo = ml_repo
         self.user_repo = user_repo

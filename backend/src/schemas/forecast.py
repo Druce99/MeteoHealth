@@ -6,7 +6,7 @@ class DayForecast(BaseModel):
     pressure: float = Field(gt=0, description="Атмосферное давление")
     temperature: float = Field(ge=-90, le=60, description="Темпиратура воздуха")
     humidity: float = Field(ge=0, le=100, description="Относительная влажность")
-    kp_index: float = Field(ge=0, le=9, description="Kp-индекс геомагнитной активности")
+    kp_index: float | None = Field(None, description="Kp-индекс геомагнитной активности")
     wellness_index: int = Field(ge=0, le=100, description="Индекс благополучия")
 
 class TodayForecastResponse(DayForecast):
