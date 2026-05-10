@@ -19,7 +19,11 @@ class WeatherTrigger(str, Enum):
     TEMPERATURE = "temperature"
     HUMIDITY = "humidity"
 
-class Sensitivity(str, Enum):
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
+class Symptom(str, Enum):
+    HEADACHE = "headache"
+    DIZZINESS = "dizziness"
+    FATIGUE = "fatigue"
+    JOINT_PAIN = "joint_pain"
+    PRESSURE_SPIKE = "pressure_spike"
+    INSOMNIA = "insomnia"
+    NAUSEA = "nausea"
